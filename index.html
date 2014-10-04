@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
 
   <head>
     <meta charset='utf-8'>
@@ -12,8 +12,12 @@
   <body>
 
   <h1>Hello World</h1>
-	<img src="file/pkq.jpg"></img>
 	
+	 Your name: <input type="text" ng-model="yourname" placeholder="World">
+        <hr>
+        Hello {{yourname || 'World'}}!
+	
+	<img src="file/pkq.jpg"></img>
 	<script src="https://gist.github.com/yxsicd/50fc2aad2c6ad209dae6.js"></script>
 	
   </body>
