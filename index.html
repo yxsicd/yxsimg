@@ -8,13 +8,27 @@
     <script src="js/jquery.min.js"></script>
     <link href="package/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="package/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
-    <script src="js/angular.min.js"></script>
-    <script src="js/hashes.min.js"></script>
-    <script src="package/bootstrap/js/bootstrap.min.js"></script>
+
     <title>Yxsimg</title>
 </head>
 
 <body data-ng-controller="my_c">
+
+    <h2 data-ng-click="initdb()">init db</h2>
+    <h2 data-ng-click="testadd()">test add </h2>
+    <h2 data-ng-click="testgetall()">test get all </h2>
+
+    <ul data-ng-repeat="item in items">
+        <li>
+            <img src="{{item.image}}" alt="" width="16px" height="16px" /></li>
+    </ul>
+
+    <input type="file" id="myfile" data-ng-mouseout="showimg()" />
+
+    <span data-ng-click="showimg()">show image</span>
+
+    <img id="myimg" src="{{mysrc}}" alt="{{mysrc_name}}" />
+
 
     <h1>Hello World</h1>
     <div id="hello">
@@ -22,9 +36,9 @@
         <input type="text" data-ng-model="yourname" placeholder="World">
         <hr>
         Hello {{yourname || 'World'}}!
-
+   
     </div>
-
+    <div></div>
     <div>
 
         <div>
@@ -83,19 +97,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li class="active"><a href="javascript:void()">Home</a></li>
+                    <li><a href="javascript:void()">About</a></li>
+                    <li><a href="javascript:void()">Contact</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                        <a href="javascript:void()" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                            <li><a href="javascript:void()">Action</a></li>
+                            <li><a href="javascript:void()">Another action</a></li>
+                            <li><a href="javascript:void()">Something else here</a></li>
                             <li class="divider"></li>
                             <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li><a href="javascript:void()">Separated link</a></li>
+                            <li><a href="javascript:void()">One more separated link</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -175,34 +189,14 @@
 
 
 
-    <script>
 
-        function my_c($scope) {
-
-
-            var SHA512 = new Hashes.SHA512;
-
-            function myhash() {
-                if (!$scope.mypassword) {
-                    return "";
-                }
-                var ret = SHA512.hex($scope.mypassword);
-                return ret;
-            }
-
-            $scope.myhash = myhash;
+    <div class="input-append">
+        <input class="span2" id="appendedInputButton" type="text">
+        <button class="btn" type="button">Go!</button>
+    </div>
 
 
 
-        }
-
-
-
-
-
-
-
-    </script>
 
 
 
@@ -210,3 +204,10 @@
 
 </body>
 </html>
+
+<script src="js/hashes.min.js"></script>
+<script src="js/idbstore.min.js"></script>
+<script src="js/app.js"></script>
+
+<script src="js/angular.min.js"></script>
+<script src="package/bootstrap/js/bootstrap.min.js"></script>
