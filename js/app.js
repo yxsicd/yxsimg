@@ -1,4 +1,4 @@
-﻿/// <reference path="hashes.js" />
+/// <reference path="hashes.js" />
 
 
 
@@ -9,9 +9,7 @@ function my_c($scope) {
     $scope.mysrc = "";
     $scope.mysrc_name = "";
 
-
     createStore_1_1();
-
 
     function myhash() {
         if (!$scope.mypassword) {
@@ -39,9 +37,7 @@ function my_c($scope) {
     }
 
     $scope.showimg = showimg;
-
     $scope.initdb = createStore_1_1;
-
     $scope.testgetall = function () {
         console.log("get all test");
         testGetAll(null, $scope);
