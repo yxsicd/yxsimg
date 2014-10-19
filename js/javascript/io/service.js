@@ -1,0 +1,2 @@
+/*! yxsimg 2014-10-19 */
+var yxs;!function(yxs){var s=function(){function s(){}return s.prototype.getdataurl=function(objid,retcall){var file=$("#"+objid)[0].files[0],reader=new FileReader;reader.onloadend=function(){retcall(reader.result)},file&&reader.readAsDataURL(file)},s.prototype.getdu=function(objid){var x=Thenjs(function(cont){var file=$("#"+objid)[0].files[0],reader=new FileReader;reader.onloadend=function(){cont(null,reader.result)},file&&reader.readAsDataURL(file)});return console.log(x._result[1]),x},new s}();yxs.s_io=s}(yxs||(yxs={}));
