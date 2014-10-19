@@ -1,8 +1,4 @@
-﻿/// <reference path="../all.js" />
-/// <reference path="../third/async.js" />
-/// <reference path="../third/then.min.js" />
-
-
+﻿
 var yxs;
 (function (yxs) {
 

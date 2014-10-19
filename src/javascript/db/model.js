@@ -1,4 +1,3 @@
-/// <reference path="all.js" />
 
 var yxs;
 (function (yxs) {

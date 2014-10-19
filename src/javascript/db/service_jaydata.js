@@ -1,5 +1,3 @@
-/// <reference path="../../../js/third/jaydata.min.js" />
-
 
 
 var yxs;

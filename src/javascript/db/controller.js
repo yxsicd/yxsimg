@@ -1,6 +1,3 @@
-/// <reference path="all.js" />
-/// <reference path="../third/then.min.js" />
-
 
 var yxs;
 
