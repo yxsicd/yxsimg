@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html  ng-app="a_db" >
 
 <head>
     <meta charset='utf-8'>
@@ -7,7 +7,6 @@
     <meta name="description" content="Yxsimg : ">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <script src="js/third/jquery.min.js"></script>
-    <script src="js/third/angular.min.js"></script>
     <script src="js/third/hashes.min.js"></script>
     <script src="package/bootstrap/js/bootstrap.min.js"></script>
  
@@ -40,43 +39,56 @@
     </ul>
 
     <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade in active" id="tab1" ng-app="a_db" ng-controller="c_db">
-            <h1>DB Test</h1>
+        <div class="tab-pane fade in active" id="tab1" ng-controller="c_jay">
+            <h1>jay Test</h1>
             <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group">
                     <button type="button" class="btn btn-danger" data-ng-click="deletedb()">deletedb</button>
                     <button type="button" class="btn btn-warning" data-ng-click="initdb()">initdb</button>
-                    <button type="button" class="btn btn-success" data-ng-click="testadd()">testadd</button>
-                    <button type="button" class="btn btn-info" data-ng-click="testgetall()">testgetall</button>
+                    <button type="button" class="btn btn-success" data-ng-click="insertdb()">insertdb</button>
+                    <button type="button" class="btn btn-danger" data-ng-click="batchinsert()">batchinsert</button>
+                    <button type="button" class="btn btn-info" data-ng-click="getall()">getall</button>
+                    <input type="text" ng-model="insertCount"  />
+                    <input type="text" ng-model="searchText" ng-change="getall()"  />
                 </div>
-            </div>
-            <div>
-                <input type="file" id="people_image" name="people_image" ng-change="clearfile()" value="" />
-
             </div>
             <div>
                 <table class="table table-bordered table-hover">
                     <tr>
-                        <th>id</th>
-                        <th>firstname</th>
-                        <th>lastname</th>
-                        <th>age</th>
-                        <th>image</th>
+                        <th>Id</th>
+                        <th>Task</th>
+                        <th>DueDate</th>
+                        <th>Completed</th>
+                        <th>Person</th>
                     </tr>
-                    <tbody data-ng-repeat="item in people.items">
+                    <tr>
+                        <th><input type='text' ng-change='getall()'  ng-model='key_Id' /></th>
+                        <th><input type='text' ng-change='getall()'  ng-model='key_Task' /></th>
+                        <th><input type='text' ng-change='getall()'    ng-model='key_DueDate' /></th>
+                        <th><input type='checkbox' ng-change='getall()'    ng-model='key_Completed' /></th>
+                        <th><input type='text' ng-change='getall()'   ng-model='key_Person' /></th>
+                    </tr>
+                    <tr>
+                        <th><span ng-bind='key_Id' /></th>
+                        <th><span ng-bind='key_Task' /></th>
+                        <th><span ng-bind='key_DueDate' /></th>
+                        <th><span ng-bind='key_Completed' /></th>
+                        <th><span ng-bind='key_Person' /></th>
+                    </tr>
+
+
+                    <tbody data-ng-repeat="item in Todos|filter: myfilter">
                         <tr>
-                            <td><span class="info">{{item.id}}</span></td>
-                            <td><span class="info">{{item.firstname}}</span></td>
-                            <td><span class="info">{{item.lastname}}</span></td>
-                            <td><span class="info">{{item.age}}</span></td>
-                            <td>
-                                <img src="{{item.image}}" alt="" style="width: 40px; height: 40px;" /></td>
+                            <td><span class="info">{{item.Id}}</span></td>
+                            <td><span class="info">{{item.Task}}</span></td>
+                            <td><span class="info">{{item.DueDate}}</span></td>
+                            <td><span class="info">{{item.Completed}}</span></td>
+                            <td><span class="info">{{item.Person.Name}}</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
         <div class="tab-pane fade" id="tab2">
             <button class="btn btn-success" data-ng-click="openbaidu()">List File</button>
             <button class="btn btn-success" data-ng-click="getfile()">Get File</button>
@@ -88,11 +100,11 @@
                 <iframe style="height: 100%" class="alert-info col-md-12" src="https://openapi.baidu.com/oauth/2.0/authorize?response_type=token&client_id=L6g70tBRRIXLsY0Z3HwKqlRE&redirect_uri=oob&scope=netdisk"></iframe>
             </div>
         </div>
-        <div class="tab-pane fade" id="tab4">
+        <!--div class="tab-pane fade" id="tab4">
             <input type="file" id="myfile" data-ng-mouseout="showimg()" />
             <span data-ng-click="showimg()">show image</span>
             <img id="myimg" src="{{mysrc}}" alt="{{mysrc_name}}" />
-        </div>
+        </div-->
         <div class="tab-pane fade" id="tab5">
             test
         </div>
@@ -112,5 +124,13 @@
     </div>
 </body>
 </html>
+
 <script src="package/jaydata/jaydata.min.js"></script>
-<script src="js/yxsimg.min.js"></script>
+<script src="js/third/angular.min.js"></script>
+<script src="src/javascript/db/service.js"></script>
+<script src="src/javascript/db/controller.js"></script>
+<script src="src/javascript/jaydata/model.js"></script>
+<script src="src/javascript/jaydata/controller.js"></script>
+
+<script src="src/javascript/app.js"></script>
+<script src="js/third/linq.js"></script>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Yxsimg : ">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+   
+    <title>Yxsimg</title>
+</head>
+
+<body >
+
+<canvas id='canvas' style='border:1px solid #aaa;display:block;margin:50px auto;' >
+ 当前浏览器不支持Canvas，请更换浏览器后再试
+</canvas>
+
+   
+</body>
+</html>
+
+<script type="text/javascript">
+
+function drawPathArray(context,arr)
+{
+
+    for (var i = 0; i < arr.length; i+=2) {
+        context.lineTo(arr[i],arr[i+1]);
+    }
+
+}
+
+function drawRect(context,x,y,width,height)
+{
+    context.beginPath();
+    drawPathArray(context,[x,y,x+width,y,x+width,y+height,x,y+height]);
+    context.closePath();
+
+}
+
+
+var canvas=document.getElementById('canvas');
+canvas.width=800;
+canvas.height=800;
+
+var context=canvas.getContext('2d');
+context.lineStyle="red";
+context.lineWidth=1;
+context.fillStyle="blue"
+
+context.rect(0,0,canvas.width,canvas.height);
+context.stroke();
+context.fill();
+
+
+
+context.beginPath()
+context.translate(400,200)
+context.rotate(45/180*Math.PI);
+context.lineCap='butt'
+context.lineTo(100,100)
+context.lineTo(700,100)
+context.stroke();
+
+
+context.beginPath()
+context.lineCap='round'
+context.lineTo(100,200)
+context.lineTo(700,200)
+context.stroke();
+
+
+context.beginPath()
+context.lineCap='square'
+context.lineTo(100,300)
+context.lineTo(700,300)
+context.stroke();
+
+
+context.beginPath()
+context.lineWidth=1
+context.lineTo(100,100)
+context.lineTo(100,700)
+context.stroke();
+
+context.beginPath()
+context.lineWidth=1
+context.lineTo(700,100)
+context.lineTo(700,700)
+context.stroke();
+
+
+context.stroke();
+
+
+</script>

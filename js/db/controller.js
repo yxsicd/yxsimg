@@ -1,3 +1,6 @@
+﻿/// <reference path="all.js" />
+/// <reference path="../third/then.min.js" />
+
 
 var yxs;
 
@@ -89,9 +92,6 @@ var yxs;
                 }
 
             };
-
-
-
 
             $scope.myhash = myhash;
             var lastnames = ['Smith', 'Miller', 'Doe', 'Frankenstein', 'Furter'],

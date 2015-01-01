@@ -1,3 +1,4 @@
+﻿/// <reference path="all.js" />
 
 
 var yxs;
@@ -21,13 +22,29 @@ var yxs;
         s.prototype.create = function (dbname, storename_arr, version) {
             var _this = this;
 
-            var todoDB = new TodoDatabase({
-                provider: 'indexedDb', databaseName: dbname
-            });
+            var request = indexedDB.open(dbname, version);
 
-            todoDB.onReady(function () {
-                //Work with todoDB now
-            });
+            request.onupgradeneeded = function (event) {
+                try {
+                    _this.dbs[dbname] = event.target.result;
+                    var db = _this.dbs[dbname];
+                    for (i in storename_arr) {
+
+                        if ((storename = storename_arr[i]["name"])) {
+                            var objectStore = db.createObjectStore(storename, { keyPath: "id" });
+                            if ((index = storename_arr[i]["index"])) {
+                                for (myi in index) {
+                                    objectStore.createIndex(index[myi], index[myi], { unique: false });
+                                }
+                            }
+                        }
+
+                    }
+                }
+                catch (e) {
+                    console.log(e);
+                }
+            };
 
         };
 
@@ -94,5 +111,5 @@ var yxs;
         return new s();
     })();
 
-    yxs.s_db_jaydata = s;
+    yxs.s_db = s;
 })(yxs || (yxs = {}));
