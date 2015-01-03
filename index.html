@@ -78,21 +78,9 @@
 
     var bunny1 = createBunny({x:100,y:300});
 
-    var begin_down = false;
-    var nowpoint={};
-    stage.mousedown = function (e) {
-        //createBunny(stage.getMousePosition());
-        begin_down = false;
-    }
-
-    stage.mouseup = function (e) {
-        begin_down = true;
-
-    }
 
     stage.tap = function (e) {
-        begin_down = true;
-        nowpoint=e.global;
+        xarr[xarr.length] = createBunny(e.global);
     }
 
     var xarr = [bunny1];
@@ -114,10 +102,6 @@
             }
         }
 
-        if (begin_down) {
-            begin_down = false;
-            xarr[xarr.length] = createBunny(nowpoint);
-        }
         renderer.render(stage);
 
     }
