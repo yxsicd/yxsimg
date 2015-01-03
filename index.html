@@ -6,14 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="Yxsimg : ">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
+
+<!--
+
     <script src="js/third/jquery.min.js"></script>
     <script src="js/third/hashes.min.js"></script>
     <script src="package/bootstrap/js/bootstrap.min.js"></script>
     <script src="js/third/pouchdb-3.2.0.min.js"></script>
     <script src="js/third/phaser.min.js"></script>
-    <script src="js/third/pixi.js"></script>
+    
     <link href="package/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="package/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+-->
+    <script src="js/third/pixi.js"></script>
 
     <title>Yxsimg</title>
 </head>
@@ -25,20 +30,6 @@
 </html>
 
 <script>
-    //var db = new PouchDB('aa');
-
-    //for (var i = 0; i < 1; i++) {
-    //    db.post({
-    //        name: 'David',
-    //        age: i
-    //    });
-    //}
-
-    //db.changes().on('change', function () {
-    //    //console.log('Ch-Ch-Changes');
-    //});
-
-    //db.allDocs({ include_docs: true, descending: true }, function (err, doc) { console.log(doc.rows); });
 
     var stage = new PIXI.Stage(0x888888);
     var renderer = PIXI.autoDetectRenderer(900, 600);
@@ -52,6 +43,9 @@
     var texture = PIXI.Texture.fromImage("file/bunny.png");
 
 
+    var graphics = new PIXI.Graphics();
+    graphics.drawCircle(100, 100, 100);
+
     function createBunny(nowposition) {
         var bunny = new PIXI.Sprite(texture);
 
@@ -64,34 +58,33 @@
         bunny.interaction = true;
         bunny.buttonMode = true;
         bunny.defaultCursor = "pointer";
-        bunny.rotation = bunny1?bunny1.rotation:0;
-        bunny.dir=1;
+        bunny.rotation = bunny1 ? bunny1.rotation : 0;
+        bunny.dir = 1;
 
         stage.addChild(bunny);
 
         bunny.mouseover = function (e) { bunny.alpha = 1; };
         bunny.mouseout = function (e) { bunny.alpha = 1; };
-        
+
         return bunny;
 
     }
 
-    var bunny1 = createBunny({x:100,y:300});
+    var bunny1 = createBunny({ x: 100, y: 300 });
 
 
-    function myclick(e)
-    {
+    function myclick(e) {
         xarr[xarr.length] = createBunny(e.global);
     }
 
     stage.tap = function (e) {
         myclick(e);
     }
-    
+
     stage.mouseup = function (e) {
         myclick(e);
     }
-    
+
 
     var xarr = [bunny1];
 
