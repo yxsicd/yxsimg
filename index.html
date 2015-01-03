@@ -7,7 +7,7 @@
     <meta name="description" content="Yxsimg : ">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
 
-<!--
+    <!--
 
     <script src="js/third/jquery.min.js"></script>
     <script src="js/third/hashes.min.js"></script>
@@ -70,6 +70,69 @@
 
     }
 
+    var graphics = new PIXI.Graphics();
+    stage.addChild(graphics);
+
+    function createBoard(x, y, x_count, y_count, width) {
+
+        // set a fill and line style
+        graphics.beginFill(0xFF3300);
+        graphics.lineStyle(3, 0xffd900, 1);
+
+        // draw a shape
+
+        for (var i = 0; i <= x_count; i++) {
+            graphics.moveTo(x + width * i, y);
+            graphics.lineTo(x + width * i, y + width * y_count);
+        }
+
+        for (var i = 0; i <= y_count; i++) {
+            graphics.moveTo(x, y + width * i);
+            graphics.lineTo(x + width * x_count, y + width * i);
+
+        }
+
+
+        return { x: x, y: y, x_count: x_count, y_count: y_count, width: width };
+
+    }
+
+    var isblack = true;
+    chessarr = [];
+    function createChess(board, point) {
+
+        var x_off = Math.round((point.x - board.x) / board.width);
+        var y_off = Math.round((point.y - board.y) / board.width);
+
+        if (x_off < 0 || x_off > board.x_count || y_off < 0 || y_off > board.y_count) {
+            return;
+        }
+
+        var x = board.x + x_off * board.width;
+        var y = board.y + y_off * board.width;
+
+
+        if (!chessarr[x] || !chessarr[x][y]) {
+            if (isblack) {
+                color = 0x000000;
+                isblack = false;
+            }
+            else {
+                color = 0xFFFFFF;
+                isblack = true;
+            }
+            graphics.beginFill(color, 1);
+            graphics.drawCircle(x, y, board.width / 2);
+            graphics.endFill();
+            chessarr[x] = {};
+            chessarr[x][y] = true;
+        }
+
+    }
+
+    var board = createBoard(50, 50, 15, 15, 30);
+
+
     var bunny1 = createBunny({ x: 100, y: 300 });
 
 
@@ -78,11 +141,13 @@
     }
 
     stage.tap = function (e) {
-        myclick(e);
+        //myclick(e);
+        createChess(board, e.global)
     }
 
     stage.mouseup = function (e) {
-        myclick(e);
+       // myclick(e);
+        createChess(board, e.global)
     }
 
 
