@@ -79,9 +79,19 @@
     var bunny1 = createBunny({x:100,y:300});
 
 
-    stage.tap = function (e) {
+    function myclick(e)
+    {
         xarr[xarr.length] = createBunny(e.global);
     }
+
+    stage.tap = function (e) {
+        myclick(e);
+    }
+    
+    stage.mouseup = function (e) {
+        myclick(e);
+    }
+    
 
     var xarr = [bunny1];
 
