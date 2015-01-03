@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  ng-app="a_db" >
+<html>
 
 <head>
     <meta charset='utf-8'>
@@ -9,128 +9,113 @@
     <script src="js/third/jquery.min.js"></script>
     <script src="js/third/hashes.min.js"></script>
     <script src="package/bootstrap/js/bootstrap.min.js"></script>
- 
+    <script src="js/third/pouchdb-3.2.0.min.js"></script>
+    <script src="js/third/phaser.min.js"></script>
+    <script src="js/third/pixi.js"></script>
     <link href="package/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="package/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
-    <script src="js/third/then.min.js"></script>
+
     <title>Yxsimg</title>
 </head>
 
-<body >
+<body>
+    <h1>test</h1>
 
-    <ul class="nav nav-tabs">
-        <li><a href="#tab1" data-toggle="tab" class="alert-success">IndexedDB</a>  </li>
-        <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle alert-success">Baidu Cloud<b class="caret"></b></a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-                <li><a href="#tab2" tabindex="-1" data-toggle="tab">Baidu Cloud Disk</a></li>
-                <li><a href="#tab3" tabindex="-1" data-toggle="tab">Baidu Access Token</a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle alert-success">File<b class="caret"></b></a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-                <li><a href="#tab4" tabindex="-1" data-toggle="tab">File Input</a></li>
-                <li><a href="#tab5" tabindex="-1" data-toggle="tab">File Save</a></li>
-            </ul>
-        </li>
-        <li><a href="#tab6" tabindex="-1" data-toggle="tab">Password</a></li>
-
-    </ul>
-
-    <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade in active" id="tab1" ng-controller="c_jay">
-            <h1>jay Test</h1>
-            <div class="btn-toolbar" role="toolbar">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-danger" data-ng-click="deletedb()">deletedb</button>
-                    <button type="button" class="btn btn-warning" data-ng-click="initdb()">initdb</button>
-                    <button type="button" class="btn btn-success" data-ng-click="insertdb()">insertdb</button>
-                    <button type="button" class="btn btn-danger" data-ng-click="batchinsert()">batchinsert</button>
-                    <button type="button" class="btn btn-info" data-ng-click="getall()">getall</button>
-                    <input type="text" ng-model="insertCount"  />
-                    <input type="text" ng-model="searchText" ng-change="getall()"  />
-                </div>
-            </div>
-            <div>
-                <table class="table table-bordered table-hover">
-                    <tr>
-                        <th>Id</th>
-                        <th>Task</th>
-                        <th>DueDate</th>
-                        <th>Completed</th>
-                        <th>Person</th>
-                    </tr>
-                    <tr>
-                        <th><input type='text' ng-change='getall()'  ng-model='key_Id' /></th>
-                        <th><input type='text' ng-change='getall()'  ng-model='key_Task' /></th>
-                        <th><input type='text' ng-change='getall()'    ng-model='key_DueDate' /></th>
-                        <th><input type='checkbox' ng-change='getall()'    ng-model='key_Completed' /></th>
-                        <th><input type='text' ng-change='getall()'   ng-model='key_Person' /></th>
-                    </tr>
-                    <tr>
-                        <th><span ng-bind='key_Id' /></th>
-                        <th><span ng-bind='key_Task' /></th>
-                        <th><span ng-bind='key_DueDate' /></th>
-                        <th><span ng-bind='key_Completed' /></th>
-                        <th><span ng-bind='key_Person' /></th>
-                    </tr>
-
-
-                    <tbody data-ng-repeat="item in Todos|filter: myfilter">
-                        <tr>
-                            <td><span class="info">{{item.Id}}</span></td>
-                            <td><span class="info">{{item.Task}}</span></td>
-                            <td><span class="info">{{item.DueDate}}</span></td>
-                            <td><span class="info">{{item.Completed}}</span></td>
-                            <td><span class="info">{{item.Person.Name}}</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="tab2">
-            <button class="btn btn-success" data-ng-click="openbaidu()">List File</button>
-            <button class="btn btn-success" data-ng-click="getfile()">Get File</button>
-            <button class="btn btn-success" data-ng-click="uploadfile()">Upload File</button>
-            <button class="btn btn-success" data-ng-click="mkdir()">mkdir</button>
-        </div>
-        <div class="tab-pane fade" id="tab3">
-            <div class="alert-success" style="height: 100%">
-                <iframe style="height: 100%" class="alert-info col-md-12" src="https://openapi.baidu.com/oauth/2.0/authorize?response_type=token&client_id=L6g70tBRRIXLsY0Z3HwKqlRE&redirect_uri=oob&scope=netdisk"></iframe>
-            </div>
-        </div>
-        <!--div class="tab-pane fade" id="tab4">
-            <input type="file" id="myfile" data-ng-mouseout="showimg()" />
-            <span data-ng-click="showimg()">show image</span>
-            <img id="myimg" src="{{mysrc}}" alt="{{mysrc_name}}" />
-        </div-->
-        <div class="tab-pane fade" id="tab5">
-            test
-        </div>
-        <div class="tab-pane fade" id="tab6">
-            <div>
-                <div>
-                    <input type="password" name="name" data-ng-model="mypassword" />
-                </div>
-                <div>
-                    <input type="text" name="name" data-ng-model="mypassword" data-ng-change="myhash()" />
-                </div>
-                <div>
-                    <span data-ng-bind="myhash()" />
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
 
-<script src="package/jaydata/jaydata.min.js"></script>
-<script src="js/third/angular.min.js"></script>
-<script src="src/javascript/db/service.js"></script>
-<script src="src/javascript/db/controller.js"></script>
-<script src="src/javascript/jaydata/model.js"></script>
-<script src="src/javascript/jaydata/controller.js"></script>
+<script>
+    //var db = new PouchDB('aa');
 
-<script src="src/javascript/app.js"></script>
-<script src="js/third/linq.js"></script>
+    //for (var i = 0; i < 1; i++) {
+    //    db.post({
+    //        name: 'David',
+    //        age: i
+    //    });
+    //}
+
+    //db.changes().on('change', function () {
+    //    //console.log('Ch-Ch-Changes');
+    //});
+
+    //db.allDocs({ include_docs: true, descending: true }, function (err, doc) { console.log(doc.rows); });
+
+    var stage = new PIXI.Stage(0x888888);
+    var renderer = PIXI.autoDetectRenderer(900, 600);
+    document.body.appendChild(renderer.view);
+    requestAnimFrame(animate);
+
+    stage.position.x = 100;
+    stage.position.y = 300;
+    stage.interactive = true;
+
+    var texture = PIXI.Texture.fromImage("file/bunny.png");
+
+
+    function createBunny(nowposition) {
+        var bunny = new PIXI.Sprite(texture);
+
+        bunny.anchor.x = 0.5;
+        bunny.anchor.y = 0.5;
+        bunny.position.x = nowposition.x;
+        bunny.position.y = nowposition.y;
+        bunny.width = 50;
+        bunny.height = 50;
+        bunny.interaction = true;
+        bunny.buttonMode = true;
+        bunny.defaultCursor = "pointer";
+        bunny.rotation = bunny1?bunny1.rotation:0;
+        bunny.dir=1;
+
+        stage.addChild(bunny);
+
+        bunny.mouseover = function (e) { bunny.alpha = 1; };
+        bunny.mouseout = function (e) { bunny.alpha = 1; };
+        
+        return bunny;
+
+    }
+
+    var bunny1 = createBunny(stage.getMousePosition());
+
+    var begin_down = false;
+    stage.mousedown = function (e) {
+        //createBunny(stage.getMousePosition());
+        begin_down = false;
+    }
+
+    stage.mouseup = function (e) {
+        begin_down = true;
+    }
+
+    var xarr = [bunny1];
+
+    var dir = 1;
+    var nowrotate = 0;
+    function animate() {
+        requestAnimFrame(animate);
+
+        for (var i = 0; i < xarr.length; i++) {
+            var bunny = xarr[i];
+            bunny.rotation += 0.1;
+            bunny.position.x += 4 * bunny.dir;
+            if (bunny.position.x > 900) {
+                bunny.dir = -1;
+            }
+            if (bunny.position.x < 0) {
+                bunny.dir = 1;
+            }
+        }
+
+        if (begin_down) {
+            begin_down = false;
+            xarr[xarr.length] = createBunny(stage.getMousePosition());
+        }
+        renderer.render(stage);
+
+    }
+
+
+
+</script>
+
