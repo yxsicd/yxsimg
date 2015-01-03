@@ -31,8 +31,11 @@
 
 <script>
 
+    var stage_width = 800;
+    var stage_heigh = 600;
+
     var stage = new PIXI.Stage(0x888888);
-    var renderer = PIXI.autoDetectRenderer(900, 600);
+    var renderer = PIXI.autoDetectRenderer(stage_width, stage_heigh);
     document.body.appendChild(renderer.view);
     requestAnimFrame(animate);
 
@@ -130,7 +133,7 @@
 
     }
 
-    var board = createBoard(50, 50, 12, 12, 60);
+    var board = createBoard(20, 20, 11, 11, 50);
 
 
     var bunny1 = createBunny({ x: 100, y: 300 });
@@ -162,7 +165,7 @@
             var bunny = xarr[i];
             bunny.rotation += 0.1;
             bunny.position.x += 4 * bunny.dir;
-            if (bunny.position.x > 900) {
+            if (bunny.position.x > stage_width) {
                 bunny.dir = -1;
             }
             if (bunny.position.x < 0) {
