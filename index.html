@@ -24,17 +24,17 @@
 </head>
 
 <body>
-    <h1>test</h1>
+    <h1>5 chess</h1>
 
 </body>
 </html>
 
 <script>
 
-    var stage_width = 800;
-    var stage_heigh = 600;
+    var stage_width = 450;
+    var stage_heigh = 400;
 
-    var stage = new PIXI.Stage(0x888888);
+    var stage = new PIXI.Stage(0xFFFFFF);
     var renderer = PIXI.autoDetectRenderer(stage_width, stage_heigh);
     document.body.appendChild(renderer.view);
     requestAnimFrame(animate);
@@ -78,20 +78,41 @@
 
     function createBoard(x, y, x_count, y_count, width) {
 
+        
+        boardcolor=0xD2B48C;
+        linecolor=0x000000;
+
         // set a fill and line style
-        graphics.beginFill(0xFF3300);
-        graphics.lineStyle(3, 0xffd900, 1);
+        graphics.beginFill(boardcolor, 1);
+        graphics.lineStyle(1, linecolor, 1);
+        graphics.moveTo(x - width , y - width);
+        graphics.lineTo(x + width * (x_count+1) , y - width);
+        graphics.lineTo(x + width * (x_count+1) , y + width * (y_count+1));
+        graphics.lineTo(x - width , y + width * (y_count+1));
+        graphics.lineTo(x - width , y - width);
+        graphics.endFill(boardcolor, 1);
 
         // draw a shape
 
         for (var i = 0; i <= x_count; i++) {
             graphics.moveTo(x + width * i, y);
             graphics.lineTo(x + width * i, y + width * y_count);
+
+           var txt=new PIXI.Text(String.fromCharCode("A".charCodeAt(0)+i),{font:'0.8px Arial',align:'right'});
+           txt.position.x= x + width * i - width/6;
+           txt.position.y= y - width/4*3;
+           stage.addChild(txt);
+
         }
 
         for (var i = 0; i <= y_count; i++) {
             graphics.moveTo(x, y + width * i);
             graphics.lineTo(x + width * x_count, y + width * i);
+
+           var txt=new PIXI.Text(i+1,{font:'0.8px Arial',align:'right'});
+           txt.position.x=x-width/4*3;
+           txt.position.y= y + width * i-width/3;
+           stage.addChild(txt);
 
         }
 
@@ -133,7 +154,7 @@
 
     }
 
-    var board = createBoard(20, 20, 11, 11, 50);
+    var board = createBoard(50, 50, 14, 14, 20);
 
 
     var bunny1 = createBunny({ x: 100, y: 300 });
