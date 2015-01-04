@@ -122,7 +122,7 @@
     }
 
     var isblack = true;
-    chessarr = [];
+    chessarr = {};
     function createChess(board, point) {
 
         var x_off = Math.round((point.x - board.x) / board.width);
@@ -136,7 +136,10 @@
         var y = board.y + y_off * board.width;
 
 
-        if (!chessarr[x] || !chessarr[x][y]) {
+        if (chessarr[x_off] && chessarr[x_off][y_off]) {
+            return;
+        }
+
             if (isblack) {
                 color = 0x000000;
                 isblack = false;
@@ -148,9 +151,12 @@
             graphics.beginFill(color, 1);
             graphics.drawCircle(x, y, board.width / 2);
             graphics.endFill();
-            chessarr[x] = {};
-            chessarr[x][y] = true;
-        }
+            if(!chessarr[x_off])
+            {
+             chessarr[x_off] = {};
+            }
+            chessarr[x_off][y_off] = true;
+      
 
     }
 
