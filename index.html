@@ -20,7 +20,7 @@
     <title>Yxsimg</title>
 </head>
 
-<body>
+<body style="width:100%">
     <h1>5 chess</h1>
 
 </body>
@@ -28,33 +28,37 @@
 
 <script>
 
-    var stage_width = 450;
-    var stage_heigh = 400;
+	var bodywidth=document.body.clientWidth;
+	
+	unit=bodywidth * 0.01;
+	
+
+    var stage_width = 90 * unit;
+    var stage_heigh = 90 * unit;
 
     var stage = new PIXI.Stage(0xFFFFFF);
     var renderer = PIXI.autoDetectRenderer(stage_width, stage_heigh);
     document.body.appendChild(renderer.view);
     requestAnimFrame(animate);
 
-    stage.position.x = 100;
-    stage.position.y = 300;
+    stage.position.x = 1 * unit;
+    stage.position.y = 1 * unit;
     stage.interactive = true;
 
     var texture = PIXI.Texture.fromImage("file/bunny.png");
 
 
     var graphics = new PIXI.Graphics();
-    graphics.drawCircle(100, 100, 100);
 
     function createBunny(nowposition) {
         var bunny = new PIXI.Sprite(texture);
 
-        bunny.anchor.x = 0.5;
-        bunny.anchor.y = 0.5;
+        bunny.anchor.x = 0.5 * unit;
+        bunny.anchor.y = 0.5 * unit;
         bunny.position.x = nowposition.x;
         bunny.position.y = nowposition.y;
-        bunny.width = 50;
-        bunny.height = 50;
+        bunny.width = 5 * unit;
+        bunny.height = 5 * unit;
         bunny.interaction = true;
         bunny.buttonMode = true;
         bunny.defaultCursor = "pointer";
@@ -95,7 +99,7 @@
             graphics.moveTo(x + width * i, y);
             graphics.lineTo(x + width * i, y + width * y_count);
 
-           var txt=new PIXI.Text(String.fromCharCode("A".charCodeAt(0)+i),{font:'0.8px Arial',align:'right'});
+           var txt=new PIXI.Text(String.fromCharCode("A".charCodeAt(0)+i),{font:'8px Arial',align:'right'});
            txt.position.x= x + width * i - width/6;
            txt.position.y= y - width/4*3;
            stage.addChild(txt);
@@ -106,7 +110,7 @@
             graphics.moveTo(x, y + width * i);
             graphics.lineTo(x + width * x_count, y + width * i);
 
-           var txt=new PIXI.Text(i+1,{font:'0.8px Arial',align:'right'});
+           var txt=new PIXI.Text(i+1,{font:'8px Arial',align:'right'});
            txt.position.x=x-width/4*3;
            txt.position.y= y + width * i-width/3;
            stage.addChild(txt);
@@ -157,10 +161,10 @@
 
     }
 
-    var board = createBoard(50, 50, 14, 14, 20);
+    var board = createBoard(3 * unit , 3 * unit , 14, 14, 6 * unit);
 
 
-    var bunny1 = createBunny({ x: 100, y: 300 });
+    var bunny1 = createBunny({ x: 6 * unit , y: 7 * unit });
 
 
     function myclick(e) {
