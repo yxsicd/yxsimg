@@ -161,7 +161,7 @@
 
     }
 
-    var board = createBoard(3 * unit , 3 * unit , 14, 14, 6 * unit);
+    var board = createBoard(3 * unit , 3 * unit , 14, 14, 80/14 * unit);
 
 
     var bunny1 = createBunny({ x: 6 * unit , y: 7 * unit });
@@ -192,7 +192,7 @@
         for (var i = 0; i < xarr.length; i++) {
             var bunny = xarr[i];
             bunny.rotation += 0.1;
-            bunny.position.x += 4 * bunny.dir;
+            bunny.position.x += 4 * unit * bunny.dir;
             if (bunny.position.x > stage_width) {
                 bunny.dir = -1;
             }
