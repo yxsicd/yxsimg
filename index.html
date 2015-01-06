@@ -99,8 +99,8 @@
             graphics.moveTo(x + width * i, y);
             graphics.lineTo(x + width * i, y + width * y_count);
 
-           var txt=new PIXI.Text(String.fromCharCode("A".charCodeAt(0)+i),{font:'8px Arial',align:'right'});
-           txt.position.x= x + width * i - width/6;
+           var txt=new PIXI.Text(String.fromCharCode("A".charCodeAt(0)+i),{font:width*2/4+'px Arial',align:'right'});
+           txt.position.x= x + width * i - width/5;
            txt.position.y= y - width/4*3;
            stage.addChild(txt);
 
@@ -110,9 +110,9 @@
             graphics.moveTo(x, y + width * i);
             graphics.lineTo(x + width * x_count, y + width * i);
 
-           var txt=new PIXI.Text(i+1,{font:'8px Arial',align:'right'});
+           var txt=new PIXI.Text(i+1,{font:width*2/4+'px Arial',align:'right'});
            txt.position.x=x-width/4*3;
-           txt.position.y= y + width * i-width/3;
+           txt.position.y= y + width * i - width/4
            stage.addChild(txt);
 
         }
