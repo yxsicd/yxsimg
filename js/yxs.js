@@ -49,6 +49,7 @@ function reset_board() {
     while (undo()) {
     };
 };
+var graphics_undo;
 function createBoard(x, y, x_count, y_count, width) {
     boardcolor = 13808780;
     linecolor = 0;
@@ -60,7 +61,9 @@ function createBoard(x, y, x_count, y_count, width) {
     graphics_board.lineTo(x + width * (x_count + 1), y + width * (y_count + 1));
     graphics_board.lineTo(x - width, y + width * (y_count + 1 ));
     graphics_board.lineTo(x - width, y - width*4);
-    graphics_board.endFill(boardcolor, 1);
+    graphics_board.endFill();
+    
+
     // set a fill and line style
     graphics_board.beginFill(boardcolor, 1);
     graphics_board.lineStyle(1, linecolor, 1);
@@ -73,31 +76,67 @@ function createBoard(x, y, x_count, y_count, width) {
     undo_txt.position.y = y - 1.5 * width
     var reset_txt = new PIXI.Text('RESET', {
         font: width * 0.5 + 'px Arial',
-        align: 'right'
+        align: 'center'
     });
+
+
+    textbackcolor=0xFFCC00
+
     reset_txt.position.x = x + width * 7
     reset_txt.position.y = y - 1.5 * width
-    var graphics_undo = new PIXI.Graphics();
-    graphics_undo.beginFill(boardcolor, 1);
+    graphics_undo = new PIXI.Graphics(0,0);
+    graphics_undo.beginFill(textbackcolor, 1);
     graphics_undo.lineStyle(1, linecolor, 1);
     graphics_undo.drawRect(x + width * 3, y - 1.5 * width, width * 2, width*0.6);
-    graphics_undo.endFill(boardcolor, 1);
+    graphics_undo.endFill(textbackcolor, 1);
     graphics_undo.addChild(undo_txt);
+    undo_txt.anchor.set(0.5,0.5);
+    undo_txt.x = Math.floor(x + width * 3 + width * 2 / 2);
+    undo_txt.y = Math.floor(y - 1.5 * width + width*0.6 /2 );
+    // graphics_undo.x=x ;
+    // graphics_undo.y=y - 1.5 * width;
+    // graphics_undo.width=width * 2;
+    // graphics_undo.height=x + width*0.6;
+   // graphics_undo.anchor.set(0.5,0.5);
+
+
+
+
     stage.addChild(graphics_undo);
     graphics_undo.interactive = true;
     graphics_undo.tap = undo;
-    graphics_undo.mousedown = undo;
+    graphics_undo.mousedown = function(){
+       undo_txt.scale.set(0.8,0.8);
+       undo();
+       window.setTimeout(function(){undo_txt.scale.set(1,1);},50);
+    };
     var graphics_reset = new PIXI.Graphics();
-    graphics_reset.beginFill(boardcolor, 1);
+    graphics_reset.beginFill(textbackcolor, 1);
     graphics_reset.lineStyle(1, linecolor, 1);
-    graphics_reset.drawRect(x + width * 7, y - 1.5 * width, width * 2, width*0.6);
+
+    var rect_reset1=new PIXI.Rectangle(x + width * 7, y - 1.5 * width, width * 2, width*0.6);
+    var rect_reset=graphics_reset.drawShape(rect_reset1);
+
+    //graphics_reset.drawRect(x + width * 7, y - 1.5 * width, width * 2, width*0.6);
     //graphics.drawRect(x + width * (x_count+1),y + 5*width, width*2.5,width);
-    graphics_reset.endFill(boardcolor, 1);
+    graphics_reset.endFill(textbackcolor, 1);
     graphics_reset.addChild(reset_txt);
     stage.addChild(graphics_reset);
     graphics_reset.interactive = true;
     graphics_reset.tap = reset_board;
-    graphics_reset.mousedown = reset_board;
+    graphics_reset.mousedown = function(){
+       graphics_reset.scale.set(0.8,0.8);
+       reset_txt.scale.set(0.8,0.8);
+       reset_board();
+       window.setTimeout(function(){reset_txt.scale.set(1,1); graphics_reset.scale.set(1,1);},50);
+    };
+    reset_txt.anchor.set(0.5,0.5);
+    reset_txt.x = Math.floor(x + width * 7 + width * 2 / 2);
+    reset_txt.y = Math.floor(y - 1.5 * width + width*0.6 /2 );
+
+
+
+
     // draw a shape
     for (var i = 0; i <= x_count; i++) {
         graphics_board.moveTo(x + width * i, y);
